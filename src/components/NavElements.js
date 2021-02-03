@@ -2,9 +2,10 @@ import React from 'react';
 import menuData from '../data/menuData'
 import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { SWITCH_NAV_VISIBILITY } from '../redux/actions/actions'
 
 
-const NavElements = ({ navOpen }) => {
+const NavElements = ({ navOpen, switchVisible }) => {
 
 
 
@@ -13,6 +14,10 @@ const NavElements = ({ navOpen }) => {
     <li className="navi-li" key={item.id} style={navOpen ? { top: `${item.id * .15 * window.innerHeight + 70}px` } : { top: `-200px` }}>
       <NavLink
         to={item.path}
+        onClick={() => {
+
+          switchVisible()
+        }}
       >
         {item.title}
       </NavLink>
@@ -30,4 +35,8 @@ const mapStateToProps = ({ navOpen }) => {
   return { navOpen }
 }
 
-export default connect(mapStateToProps)(NavElements);
+const mapDispatchToProps = (dispatch) => {
+  return { switchVisible: () => dispatch({ type: SWITCH_NAV_VISIBILITY }) }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavElements);

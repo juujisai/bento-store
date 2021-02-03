@@ -79,7 +79,7 @@ body {
 .bar-3 {
   position: absolute;
   left: 0;
-  transition: var(--mainTransition);
+  transition: .7s;
   transform: rotate(0);
   transform-origin: left;
 }
