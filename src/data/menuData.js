@@ -1,4 +1,4 @@
-export const menuData = [
+const menuData = [
   {
     id: '0',
     title: 'Home',
@@ -28,3 +28,5 @@ export const menuData = [
     exact: false,
   },
 ]
+
+export default menuData

@@ -9,6 +9,145 @@
   --mainPadding: 20px;
   --mainMargin: 20px;
 
+  --mainDarkGreen: rgb(41, 107, 58);
+  --mainLightGreen: rgb(78, 204, 110);
+
+  --navBtnSize: 40px;
+  --navBarHeight: 7px;
 
 
+  --mainTransition: .3s;
+}
+
+
+body {
+  min-height: 300vh;
+}
+
+.main {
+  margin-top: 70px;
+
+}
+
+
+.navigation {
+  width: 100%;
+  /* height: 100vh; */
+  overflow: hidden;
+}
+
+.navButton {
+  position: fixed;
+  width: 100%;
+  height: 70px;
+
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  background-color: var(--mainDarkGreen);
+  z-index: 5;
+  transition: 1s;
+}
+
+.change-nav-color {
+  background-color: transparent;
+}
+
+.menu-bars {
+  position: relative;
+  margin-right: 5%;
+  width: var(--navBtnSize);
+  height: var(--navBtnSize);
+  /* display: flex;
+  flex-wrap: wrap;
+  align-items: center; */
+  ;
+}
+
+.bar {
+  position: absolute;
+
+  width: 100%;
+  height: var(--navBarHeight);
+  background-color: #ddd;
+
+}
+
+.bar-1,
+.bar-2,
+.bar-3 {
+  position: absolute;
+  left: 0;
+  transition: var(--mainTransition);
+  transform: rotate(0);
+  transform-origin: left;
+}
+
+.bar-1 {
+  top: 0
+}
+
+.bar-2 {
+  top: calc(50% - var(--navBarHeight) / 2)
+}
+
+.bar-3 {
+  top: calc(100% - var(--navBarHeight))
+}
+
+.open-menu .bar-1 {
+  top: calc(100% - var(--navBarHeight));
+  transform: rotate(-45deg);
+  /* width: calc(var(--navBtnSize) * 1.41) */
+}
+
+.open-menu .bar-2 {
+  width: 0px;
+}
+
+.open-menu .bar-3 {
+  top: 0;
+  transform: rotate(45deg);
+  /* width: calc(var(--navBtnSize) * 1.41) */
+}
+
+.navi.hidden {
+  top: -150%;
+}
+
+.navi {
+  position: fixed;
+  top: 0px;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: #fff;
+
+  list-style-type: none;
+  overflow: hidden;
+  transition: 1s;
+}
+
+.navi-li {
+  position: absolute;
+  left: 0;
+  top: -100%;
+  width: 100%;
+  /* display: flex;
+  justify-content: center; */
+  line-height: 15vh;
+  transition: 1s;
+}
+
+
+.navi-li a {
+
+  display: block;
+  width: 100%;
+  text-align: center;
+  color: var(--mainDarkGreen);
+  text-decoration: none;
+  font-size: 1.25em;
+  font-weight: 900;
 }

@@ -9,7 +9,7 @@ import { Provider } from 'react-redux'
 
 import { initialStore } from './redux/initialStore'
 
-
+import { BrowserRouter as Router } from 'react-router-dom'
 
 
 
@@ -17,15 +17,22 @@ const store = createStore(reducer, initialStore)
 
 
 
+
 function App() {
+
+
   return (
-    <Provider store={store}>
-      <div className="App">
-        <Navigation />
-        <Page />
-        <Footer />
-      </div>
-    </Provider>
+    <Router>
+      <Provider store={store}>
+        <div className="App">
+          <Navigation />
+          <div className="main">
+            <Page />
+          </div>
+          <Footer />
+        </div>
+      </Provider>
+    </Router>
   );
 }
 

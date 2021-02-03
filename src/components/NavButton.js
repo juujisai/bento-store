@@ -5,8 +5,25 @@ import { SWITCH_NAV_VISIBILITY } from '../redux/actions/actions'
 
 const NavButton = ({ navOpen, switchVisible }) => {
   // console.log(isMenuOpen)
+
+  const [scrollValue, setScrollValue] = React.useState(0)
+
+  window.addEventListener('scroll', (e) => {
+    setScrollValue(window.scrollY)
+  })
+
+
+
   return (
-    <div className={`navButton ${navOpen ? `open-menu` : null}`} onClick={() => switchVisible()} > x {navOpen ? 'yes' : 'no'}</div >
+    <div className={`navButton ${scrollValue > window.innerHeight / 2 && !navOpen ? 'change-nav-color' : null}`}  >
+
+      <div className={`menu-bars ${navOpen ? `open-menu` : null}`} onClick={() => switchVisible()}>
+        <div className="bar bar-1"></div>
+        <div className="bar bar-2"></div>
+        <div className="bar bar-3"></div>
+
+      </div>
+    </div >
   );
 }
 
