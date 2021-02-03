@@ -25,38 +25,55 @@ class Header extends React.Component {
     'Bezpieczeństwo zakupów to nasz priorytet'
   ]
 
+
+  handleSquareOnClick = (id) => {
+    let bannerSquares = this.state.bannerSquares
+
+    bannerSquares.forEach(item => item.style.backgroundColor = '#fff')
+    bannerSquares[id].style.backgroundColor = 'rgb(41, 107, 58)'
+
+    clearInterval(this.idOfInterval)
+    this.idOfInterval = setInterval(this.manageTheMainInterval, this.time * 3)
+
+    this.setState({ bannerNumber: id })
+  }
+
+
+  manageTheMainInterval = () => {
+    let idOfMessage = this.state.idOfMessage
+
+
+    let videoMessage = this.videoMessageList[idOfMessage]
+
+    idOfMessage >= this.videoMessageList.length - 1 ? idOfMessage = 0 : idOfMessage++
+
+
+
+    //banner
+    let bannerNumber = this.state.bannerNumber
+
+    bannerNumber >= bannerData.length - 1 ? bannerNumber = 0 : bannerNumber++
+
+    let bannerSquares = this.state.bannerSquares
+
+    bannerSquares.forEach(item => item.style.backgroundColor = '#fff')
+    bannerSquares[bannerNumber].style.backgroundColor = 'rgb(41, 107, 58)'
+
+
+    this.setState({ idOfMessage, videoMessage, bannerNumber })
+
+
+    // text from left
+    setTimeout(() => this.setState({ slideTheMessage: false }), this.time * 2)
+    setTimeout(() => this.setState({ slideTheMessage: true }), this.time * 3)
+
+  }
+
+
   componentDidUpdate = (prevProps, prevState) => {
 
     if (prevState.isReady !== this.state.isReady) {
-      this.idOfInterval = setInterval(() => {
-        let idOfMessage = this.state.idOfMessage
-
-
-        let videoMessage = this.videoMessageList[idOfMessage]
-
-        idOfMessage >= this.videoMessageList.length - 1 ? idOfMessage = 0 : idOfMessage++
-
-
-
-        //banner
-        let bannerNumber = this.state.bannerNumber
-
-        bannerNumber >= bannerData.length - 1 ? bannerNumber = 0 : bannerNumber++
-
-        let bannerSquares = this.state.bannerSquares
-
-        bannerSquares.forEach(item => item.style.backgroundColor = '#fff')
-        bannerSquares[bannerNumber].style.backgroundColor = 'rgb(41, 107, 58)'
-
-
-        this.setState({ idOfMessage, videoMessage, bannerNumber })
-
-
-        // text from left
-        setTimeout(() => this.setState({ slideTheMessage: false }), this.time * 2)
-        setTimeout(() => this.setState({ slideTheMessage: true }), this.time * 3)
-
-      }, this.time * 3)
+      this.idOfInterval = setInterval(this.manageTheMainInterval, this.time * 3)
     }
   }
 
@@ -80,7 +97,7 @@ class Header extends React.Component {
     )
 
     const squareNav = bannerData.map(item =>
-      <div className={`square-nav-item ${item.id}`} key={item.id}></div>
+      <div className={`square-nav-item ${item.id}`} key={item.id} onClick={() => this.handleSquareOnClick(item.id)}></div>
     )
 
     return (
