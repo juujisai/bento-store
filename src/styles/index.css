@@ -330,7 +330,12 @@ header {
 
 
 
+/* section new */
+.loader {
+  min-height: 100vh;
+}
 
+/* end of section new */
 
 
 
