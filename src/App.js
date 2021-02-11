@@ -15,7 +15,7 @@ import { BrowserRouter as Router } from 'react-router-dom'
 
 const store = createStore(reducer, initialStore)
 
-
+localStorage.setItem('cartBento', JSON.stringify([]))
 
 
 function App() {
