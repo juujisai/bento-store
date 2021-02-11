@@ -4,4 +4,5 @@ export const initialStore = {
   navOpen: false,
   shopData: shopProductsData,
   dataToShow: [],
+  itemPage: { id: null },
 }

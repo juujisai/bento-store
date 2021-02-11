@@ -1,8 +1,7 @@
-import { SWITCH_NAV_VISIBILITY, FILTER_DATA_TO_SHOW } from '../actions/actions'
+import { SWITCH_NAV_VISIBILITY, FILTER_DATA_TO_SHOW, GET_ITEM_FROM_ID } from '../actions/actions'
 
 
 function reducer(state, action) {
-  // console.log(state)
   if (action.type === SWITCH_NAV_VISIBILITY) {
     return { ...state, navOpen: !state.navOpen }
   }
@@ -10,14 +9,17 @@ function reducer(state, action) {
   if (action.type === FILTER_DATA_TO_SHOW) {
 
     if (action.payload.filter === 'news') {
-      console.log('chuj')
       const dataToShow = state.shopData.filter(item => item.isNew)
-      // console.log({ ...state, dataToShow })
       return { ...state, dataToShow }
     }
 
 
   }
+
+  if (action.type === GET_ITEM_FROM_ID) {
+    return { ...state, itemPage: state.shopData.filter(i => i.id === action.payload.id)[0] }
+  }
+
 
 
   return state

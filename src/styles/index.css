@@ -335,6 +335,65 @@ header {
   min-height: 100vh;
 }
 
+.whats-new {
+  padding: 30px 10% 0;
+  font-size: 1.75em;
+}
+
+.items {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* item demo */
+.shop-item-demo {
+  position: relative;
+  margin: 30px 10%;
+}
+
+.link-to {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.link-to a {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+.img-demo-cont {
+  width: 100%;
+  height: auto;
+}
+
+.img-demo-cont img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.name-demo {
+  margin-top: 10px;
+}
+
+.name {
+  font-size: 1.25em;
+  font-weight: 900;
+  color: var(--mainDarkGreen);
+}
+
+.price {
+  font-size: 1.25em;
+  font-weight: 900;
+}
+
+/* end of item demo */
+
+
 /* end of section new */
 
 
