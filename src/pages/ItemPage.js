@@ -15,26 +15,15 @@ const ItemPage = ({ itemPage, getItemForPage }) => {
 
   const handleClick = () => {
     setShowAlert(true)
-
     setTimeout(() => { setShowAlert(false) }, 2000)
-
   }
 
   React.useEffect(() => {
-    setTimeout(() => {
-      item.id === null && getItemForPage(parseInt(idOfItem))
-      setItem(itemPage)
-    }, 1000)
+    getItemForPage(parseInt(idOfItem))
+    setItem(itemPage)
   }, [getItemForPage, idOfItem, item, itemPage])
 
 
-  if (item.id === null) {
-    return (
-      <div className="loader">
-        loading . . .
-      </div>
-    )
-  }
 
   const { img, name, group, type, color, size, price, desc } = item
 

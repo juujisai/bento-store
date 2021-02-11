@@ -7,7 +7,12 @@ import { SWITCH_NAV_VISIBILITY } from '../redux/actions/actions'
 
 const NavElements = ({ navOpen, switchVisible }) => {
 
-
+  const handleClick = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    })
+  }
 
 
   const nav = menuData.map(item => (
@@ -15,7 +20,7 @@ const NavElements = ({ navOpen, switchVisible }) => {
       <NavLink
         to={item.path}
         onClick={() => {
-
+          handleClick()
           switchVisible()
         }}
       >
