@@ -5,4 +5,5 @@ export const initialStore = {
   shopData: shopProductsData,
   dataToShow: [],
   itemPage: { id: null },
+  cart: []
 }

@@ -8,6 +8,7 @@ import News from '../pages/News'
 import Women from '../pages/Women'
 import Men from '../pages/Men'
 import ItemPage from '../pages/ItemPage'
+import CartPage from '../pages/CartPage'
 
 const menuDataComponents = [<Header />, <News />, <Women />, <Men />]
 
@@ -21,6 +22,7 @@ const Page = () => {
       <Switch>
         {menuDataList}
         <Route path={`/shop/items/:id`}><ItemPage /></Route>
+        <Route path='/cart'><CartPage /></Route>
         <ErrorPage />
 
       </Switch>

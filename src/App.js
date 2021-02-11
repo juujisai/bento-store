@@ -11,7 +11,7 @@ import { initialStore } from './redux/initialStore'
 
 import { BrowserRouter as Router } from 'react-router-dom'
 
-
+import CartIcon from './components/CartIcon'
 
 const store = createStore(reducer, initialStore)
 
@@ -26,6 +26,7 @@ function App() {
       <Provider store={store}>
         <div className="App">
           <Navigation />
+          <CartIcon />
           <div className="main">
             <Page />
           </div>

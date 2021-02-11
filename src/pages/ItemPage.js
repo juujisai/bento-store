@@ -14,6 +14,10 @@ const ItemPage = ({ itemPage, getItemForPage }) => {
   const idOfItem = useParams().id
 
   const handleClick = () => {
+    const itemN = item
+    typeof itemN.amount === 'undefined' ? itemN.amount = 1 : itemN.amount = itemN.amount + 1
+
+    setItem(itemN)
     setShowAlert(true)
     setTimeout(() => { setShowAlert(false) }, 2000)
   }
