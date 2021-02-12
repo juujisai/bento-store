@@ -13,6 +13,6 @@ export const getItem = (id) => {
   return { type: GET_ITEM_FROM_ID, payload: { id } }
 }
 
-export const addToCart = (item) => {
-  return { type: ADD_ITEM_TO_CART, payload: { item } }
+export const addToCart = (item, size) => {
+  return { type: ADD_ITEM_TO_CART, payload: { item, size } }
 }

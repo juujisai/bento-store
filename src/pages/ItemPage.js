@@ -6,19 +6,16 @@ import noPicture from '../images/no_picture.png'
 import Alert from '../components/Alert'
 
 
-const ItemPage = ({ itemPage, getItemForPage, cart, addItemToCart }) => {
+const ItemPage = ({ itemPage, getItemForPage, addItemToCart }) => {
 
   const [item, setItem] = React.useState(itemPage)
   const [showAlert, setShowAlert] = React.useState(false)
-
+  const [selectedSize, setSelectedSize] = React.useState('S')
   const idOfItem = useParams().id
 
   const handleClick = () => {
-    const itemN = item
-
-    addItemToCart(itemN)
-
-    setItem(itemN)
+    console.log(itemPage)
+    addItemToCart(itemPage, selectedSize)
     setShowAlert(true)
     setTimeout(() => { setShowAlert(false) }, 2000)
   }
@@ -59,7 +56,7 @@ const ItemPage = ({ itemPage, getItemForPage, cart, addItemToCart }) => {
       <div className="item-size">
         <form className='name-demo'>
           <label>Rozmiar</label>
-          <select name="size" id="size">
+          <select name="size" id="size" value={selectedSize} onChange={(e) => { setSelectedSize(e.target.value) }}>
             {size === 'all' ? setFullSizeOptions : <option value='onesize'>onesize</option>}
           </select>
         </form>
@@ -85,14 +82,14 @@ const ItemPage = ({ itemPage, getItemForPage, cart, addItemToCart }) => {
   );
 }
 
-const mapStateToProps = ({ itemPage, cart }) => {
-  return { itemPage, cart }
+const mapStateToProps = ({ itemPage }) => {
+  return { itemPage }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     getItemForPage: (id) => dispatch(getItem(id)),
-    addItemToCart: (item) => dispatch(addToCart(item))
+    addItemToCart: (item, size) => dispatch(addToCart(item, size))
   }
 }
 

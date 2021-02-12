@@ -18,10 +18,38 @@ function reducer(state, action) {
   }
 
   if (action.type === ADD_ITEM_TO_CART) {
-    state.cart.filter(i => i.id === action.payload.item.id && i.orderedSize === action.payload.item.orderedSize).length !== 0 ? action.payload.item.amount = action.payload.item.amount + 1 : action.payload.item.amount = 1
-    let newCart = [...state.cart, action.payload.item]
+    let newItem = action.payload.item
+    // newItem.selectedSize = action.payload.size
+
+
+
+    // state.cart.filter(i => i.id === newItem.id && i.selectedSize === newItem.selectedSize).length !== 0 ? newItem.amount = newItem.amount + 1 : newItem.amount = 1
+
+    let newCart = [...state.cart]
+
+    if (state.cart.filter(i => i.id === newItem.id && newItem.order[1] === action.payload.size).length !== 0) {
+      console.log('jest')
+
+      const id = newCart.findIndex(i => i.id === newItem.id)
+
+      newCart[id].order = [newCart[id].order[0] + 1, action.payload.size]
+
+
+
+
+    } else {
+      console.log(' nie jest')
+
+      newItem.order = [1, action.payload.size]
+      newCart = [...state.cart, newItem]
+    }
+
+
+
+
+    // let newCart = [...state.cart, action.payload.item]
     newCart = [...new Set(newCart)]
-    console.log(newCart)
+    console.log('new', newCart)
     // dodaj local storage
 
     return { ...state, cart: newCart }
