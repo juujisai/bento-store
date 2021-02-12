@@ -1,12 +1,12 @@
 import React from 'react';
 import { useParams } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { getItem } from '../redux/actions/actions'
+import { getItem, addToCart } from '../redux/actions/actions'
 import noPicture from '../images/no_picture.png'
 import Alert from '../components/Alert'
 
 
-const ItemPage = ({ itemPage, getItemForPage }) => {
+const ItemPage = ({ itemPage, getItemForPage, cart, addItemToCart }) => {
 
   const [item, setItem] = React.useState(itemPage)
   const [showAlert, setShowAlert] = React.useState(false)
@@ -15,7 +15,8 @@ const ItemPage = ({ itemPage, getItemForPage }) => {
 
   const handleClick = () => {
     const itemN = item
-    typeof itemN.amount === 'undefined' ? itemN.amount = 1 : itemN.amount = itemN.amount + 1
+
+    addItemToCart(itemN)
 
     setItem(itemN)
     setShowAlert(true)
@@ -84,12 +85,15 @@ const ItemPage = ({ itemPage, getItemForPage }) => {
   );
 }
 
-const mapStateToProps = ({ itemPage }) => {
-  return { itemPage }
+const mapStateToProps = ({ itemPage, cart }) => {
+  return { itemPage, cart }
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return { getItemForPage: (id) => dispatch(getItem(id)) }
+  return {
+    getItemForPage: (id) => dispatch(getItem(id)),
+    addItemToCart: (item) => dispatch(addToCart(item))
+  }
 }
 
 

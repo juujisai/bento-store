@@ -4,10 +4,22 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 const CartIcon = ({ cart }) => {
+
+  let numberToDisplay = 0;
+
+  const getSum = (cart, startValue) => {
+    let total = startValue;
+
+    cart.forEach(item => total += item.amount)
+    return total
+  }
+
+  numberToDisplay = getSum(cart, 0)
+
   return (
     <div className='cart-icon' >
       <FiShoppingCart />
-      <span className='cart-length'>{cart.length}</span>
+      <span className='cart-length'>{numberToDisplay}</span>
       <Link to='/cart' />
     </div>
   );
