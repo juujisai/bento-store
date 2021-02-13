@@ -19,37 +19,41 @@ function reducer(state, action) {
 
   if (action.type === ADD_ITEM_TO_CART) {
     let newItem = action.payload.item
-    // newItem.selectedSize = action.payload.size
 
+    // funkcja dodaje item do koszyka i dodaje mu klucz order, w którym przechowywane są ilości zamówionych przedmiotów o tym samym id oraz ich rozmiary
 
-
-    // state.cart.filter(i => i.id === newItem.id && i.selectedSize === newItem.selectedSize).length !== 0 ? newItem.amount = newItem.amount + 1 : newItem.amount = 1
 
     let newCart = [...state.cart]
 
-    if (state.cart.filter(i => i.id === newItem.id && newItem.order[1] === action.payload.size).length !== 0) {
-      console.log('jest')
+    // funkcja która sprawdza czy jest już takie id w koszyku i czy jest już dodany taki rozmiar do zamówienia (filter)
+    if (state.cart.filter(i => i.id === newItem.id && i.order.filter(k => k.size === action.payload.size).length).length !== 0) {
+      // console.log('jest')
 
       const id = newCart.findIndex(i => i.id === newItem.id)
+      const id2 = state.cart[id].order.findIndex(i => i.size === action.payload.size)
 
-      newCart[id].order = [newCart[id].order[0] + 1, action.payload.size]
+      console.log(id, id2)
+      newCart[id].order[id2].amount++
 
 
 
 
     } else {
-      console.log(' nie jest')
-
-      newItem.order = [1, action.payload.size]
+      // console.log(' nie jest')
+      newItem.order.push({
+        amount: 1,
+        size: action.payload.size
+      })
       newCart = [...state.cart, newItem]
     }
 
 
-
-
-    // let newCart = [...state.cart, action.payload.item]
     newCart = [...new Set(newCart)]
-    console.log('new', newCart)
+
+
+    // console.log('new', newCart)
+
+
     // dodaj local storage
 
     return { ...state, cart: newCart }

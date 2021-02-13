@@ -14,7 +14,9 @@ const ItemPage = ({ itemPage, getItemForPage, addItemToCart }) => {
   const idOfItem = useParams().id
 
   const handleClick = () => {
-    console.log(itemPage)
+    // item.selectedSize = ''
+    if (typeof item.order === 'undefined') item.order = []
+    // console.log(itemPage)
     addItemToCart(itemPage, selectedSize)
     setShowAlert(true)
     setTimeout(() => { setShowAlert(false) }, 2000)
