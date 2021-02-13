@@ -502,6 +502,56 @@ header {
   border-radius: 50%;
 }
 
+.cartpage {
+  width: 90%;
+  margin: 0 auto;
+  overflow-x: hidden;
+}
+
+.cart-table {
+  margin: 20px 0;
+  width: 100%;
+
+  overflow-x: hidden;
+}
+
+.cart-table tr {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.cart-table tr th {
+  background-color: var(--mainDarkGreen);
+  color: #ddd
+}
+
+.cart-table tr th,
+.cart-table tr td {
+  padding: 10px 5px;
+  width: calc(70% / 3);
+  text-align: center;
+  /* outline: 1px solid #ddd; */
+}
+
+.line td {
+  /* border-bottom: 1px solid #000; */
+}
+
+
+.cart-table tr th:nth-of-type(1) img,
+.cart-table tr td:nth-of-type(1) img {
+  width: 100%;
+  object-fit: cover;
+}
+
+
+.cart-table tr th:nth-of-type(2),
+.cart-table tr td:nth-of-type(2) {
+  width: 30%;
+}
+
+
+
 /* end of cart */
 
 
