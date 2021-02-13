@@ -14,8 +14,8 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import CartIcon from './components/CartIcon'
 
 const store = createStore(reducer, initialStore)
-
-localStorage.setItem('cartBento', JSON.stringify([]))
+// console.log(JSON.parse(localStorage.getItem('cartBento')))
+// JSON.parse(localStorage.getItem('cartBento')) === null && localStorage.setItem('cartBento', JSON.stringify([]))
 
 
 function App() {

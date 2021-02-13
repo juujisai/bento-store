@@ -1,9 +1,21 @@
 import React from 'react';
+import { connect } from 'react-redux'
 
-const CartPage = () => {
+const CartPage = ({ cart }) => {
+
+
   return (
-    <div>cartpage</div>
+    <div className='cartpage'>
+      <h1>Koszyk</h1>
+      <table className="cart">
+
+      </table>
+    </div>
   );
 }
 
-export default CartPage;
+const mapStateToProps = ({ cart }) => {
+  return { cart }
+}
+
+export default connect(mapStateToProps)(CartPage);

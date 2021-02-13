@@ -55,6 +55,8 @@ function reducer(state, action) {
 
 
     // dodaj local storage
+    localStorage.setItem('cartBento', JSON.stringify(newCart))
+
 
     return { ...state, cart: newCart }
   }

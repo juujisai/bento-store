@@ -1,6 +1,9 @@
 import shopProductsData from '../data/shopProductsData'
 
-const data = JSON.parse(localStorage.getItem('cartBento'));
+let data;
+
+JSON.parse(localStorage.getItem('cartBento')) === null ? data = [] : data = JSON.parse(localStorage.getItem('cartBento'));
+
 
 export const initialStore = {
   navOpen: false,
