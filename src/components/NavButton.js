@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { SWITCH_NAV_VISIBILITY } from '../redux/actions/actions'
-
+import logo from '../images/header/logo.png'
 
 const NavButton = ({ navOpen, switchVisible }) => {
   // console.log(isMenuOpen)
@@ -16,7 +16,7 @@ const NavButton = ({ navOpen, switchVisible }) => {
 
   return (
     <div className={`navButton ${scrollValue > window.innerHeight / 2 && !navOpen ? 'change-nav-color' : null}`}  >
-
+      <div className="logo"><img src={logo} alt="logo" /></div>
       <div className={`menu-bars ${navOpen ? `open-menu` : null}`} onClick={() => switchVisible()}>
         <div className="bar bar-1"></div>
         <div className="bar bar-2"></div>
