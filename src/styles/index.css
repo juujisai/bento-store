@@ -552,10 +552,6 @@ header {
   /* outline: 1px solid #ddd; */
 }
 
-.line td {
-  /* border-bottom: 1px solid #000; */
-}
-
 
 .cart-table tr th:nth-of-type(1) img,
 .cart-table tr td:nth-of-type(1) img {

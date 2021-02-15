@@ -29,9 +29,9 @@ const CartItem = ({ data: { img, name, id, order, price }, change }) => {
       </tr>
       <tr className='line'>
         <th id='cart-item-tools' colSpan='4'>
-          <span className='icon-success' onClick={() => change('increase', id)}><IoBagAddSharp /></span>
-          <span onClick={() => change('remove', id)}><IoTrashBinSharp /></span>
-          <span className='icon-danger' onClick={() => change('decrease', id)}><IoBagRemoveSharp /></span>
+          <span className='icon-success' onClick={() => change('increase', id, order[0].size)}><IoBagAddSharp /></span>
+          <span onClick={() => change('remove', id, order[0].size)}><IoTrashBinSharp /></span>
+          <span className='icon-danger' onClick={() => change('decrease', id, order[0].size)}><IoBagRemoveSharp /></span>
         </th>
 
 
@@ -41,7 +41,7 @@ const CartItem = ({ data: { img, name, id, order, price }, change }) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return { change: (operator, id) => dispatch(changeCartItem(operator, id)) }
+  return { change: (operator, id, size) => dispatch(changeCartItem(operator, id, size)) }
 }
 
 export default connect(null, mapDispatchToProps)(CartItem);

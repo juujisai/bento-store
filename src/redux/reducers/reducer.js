@@ -64,6 +64,8 @@ function reducer(state, action) {
     console.log(id)
     if (action.payload.operator === 'remove') {
       cart = cart.filter(item => item.id !== id)
+
+      console.log('removing')
     }
 
     if (action.payload.operator === 'increase') {
@@ -73,6 +75,8 @@ function reducer(state, action) {
     if (action.payload.operator === 'decrease') {
       console.log('decreasing')
     }
+
+    localStorage.setItem('cartBento', JSON.stringify(cart))
 
     return { ...state, cart }
   }

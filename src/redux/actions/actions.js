@@ -21,8 +21,8 @@ export const addToCart = (item, size) => {
   return { type: ADD_ITEM_TO_CART, payload: { item, size } }
 }
 
-export const changeCartItem = (operator, id) => {
-  return { type: CHANGE_ITEM_COUNT, payload: { operator, id } }
+export const changeCartItem = (operator, id, size) => {
+  return { type: CHANGE_ITEM_COUNT, payload: { operator, id, size } }
 
 }
 
