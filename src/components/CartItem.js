@@ -2,23 +2,22 @@ import React from 'react';
 import no_picture from '../images/no_picture.png'
 import { Link } from 'react-router-dom'
 import { IoTrashBinSharp, IoBagAddSharp, IoBagRemoveSharp } from 'react-icons/io5'
+import { connect } from 'react-redux'
+import { changeCartItem } from '../redux/actions/actions'
 
-const CartItem = ({ data: { img, name, id, order, price } }) => {
-  console.log(img)
+
+
+const CartItem = ({ data: { img, name, id, order, price }, change }) => {
 
   let sum = 0;
 
   const amount = order.map((item, i) => {
-    sum += item.amount * price
+    sum += (item.amount * price)
     return (
       <p key={i}>{item.amount} x {item.size}</p>
     )
   }
   )
-
-  const handleClick = (operation) => {
-    console.log(operation, id, order)
-  }
 
   return (
     <>
@@ -26,16 +25,23 @@ const CartItem = ({ data: { img, name, id, order, price } }) => {
         <td><Link to={`/shop/items/${id}`}><img src={img === 'undefined' ? no_picture : img} alt={name} /></Link></td>
         <td>{name}</td>
         <td>{amount}</td>
-        <td>{sum} zł</td>
+        <td>{sum.toFixed(2)} zł</td>
       </tr>
       <tr className='line'>
-        <td></td>
-        <td className='icon-success' onClick={() => handleClick('add')}> <IoBagAddSharp /> </td>
-        <td className='icon-danger' onClick={() => handleClick('remove')}> <IoBagRemoveSharp /> </td>
-        <td onClick={() => handleClick('clearItem')}> <IoTrashBinSharp /> </td>
+        <th id='cart-item-tools' colSpan='4'>
+          <span className='icon-success' onClick={() => change('increase', id)}><IoBagAddSharp /></span>
+          <span onClick={() => change('remove', id)}><IoTrashBinSharp /></span>
+          <span className='icon-danger' onClick={() => change('decrease', id)}><IoBagRemoveSharp /></span>
+        </th>
+
+
       </tr>
     </>
   );
 }
 
-export default CartItem;
+const mapDispatchToProps = (dispatch) => {
+  return { change: (operator, id) => dispatch(changeCartItem(operator, id)) }
+}
+
+export default connect(null, mapDispatchToProps)(CartItem);

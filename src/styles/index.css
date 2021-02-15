@@ -570,6 +570,20 @@ header {
 }
 
 
+.line {
+  width: 100%;
+}
+
+#cart-item-tools {
+  background-color: transparent;
+  text-align: right;
+}
+
+#cart-item-tools span {
+  margin-right: 30px;
+  color: var(--mainDarkGreen)
+}
+
 
 /* end of cart */
 
