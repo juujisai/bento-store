@@ -7,24 +7,26 @@ import { changeCartItem } from '../redux/actions/actions'
 
 
 
-const CartItem = ({ data: { img, name, id, order, price }, change }) => {
+const CartItem = ({ data: { img, name, id, order, price }, number, change }) => {
 
   let sum = 0;
-
-  const amount = order.map((item, i) => {
-    sum += (item.amount * price)
-    return (
-      <p key={i}>{item.amount} x {item.size}</p>
-    )
-  }
-  )
+  let amount = order[number].amount
+  sum = amount * price
+  // const amount = order.map((item, i) => {
+  //   sum += (item.amount * price)
+  //   return (
+  //     <p key={i}>{item.amount} x {item.size}</p>
+  //   )
+  // }
+  // )
 
   return (
     <>
       <tr>
         <td><Link to={`/shop/items/${id}`}><img src={img === 'undefined' ? no_picture : img} alt={name} /></Link></td>
         <td>{name}</td>
-        <td>{amount}</td>
+        <td>{amount} x {order[number].size}</td>
+        {/* <td>{amount}</td> */}
         <td>{sum.toFixed(2)} zł</td>
       </tr>
       <tr className='line'>

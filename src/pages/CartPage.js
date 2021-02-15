@@ -4,9 +4,14 @@ import CartItem from '../components/CartItem'
 
 const CartPage = ({ cart }) => {
 
-  const items = cart.map((item, i) => (
-    <CartItem data={item} key={i} />
-  ))
+  // const items = cart.map((item, i) => (
+  //   <CartItem data={item} key={i} />
+  // ))
+  cart.forEach(a => console.log(a))
+  const items = cart.map(a => a.order.map((b, i) => (
+    <CartItem data={a} key={i} number={i} />
+  )))
+
 
   return (
     <div className='cartpage'>
