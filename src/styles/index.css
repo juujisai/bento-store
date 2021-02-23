@@ -48,7 +48,7 @@ body {
   align-items: center;
 
   background-color: var(--mainDarkGreen);
-  z-index: 5;
+  z-index: 7;
   transition: 1s;
 }
 
@@ -148,7 +148,7 @@ body {
   list-style-type: none;
   overflow: hidden;
   transition: 1s;
-  z-index: 4;
+  z-index: 6;
 }
 
 .navi-li {
@@ -351,6 +351,8 @@ header {
 /* section new */
 .loader {
   min-height: 100vh;
+  text-align: center;
+  margin-top: 20vh;
 }
 
 .whats-new {
@@ -580,6 +582,30 @@ header {
   color: var(--mainDarkGreen)
 }
 
+.empty-cart {
+  height: calc(100vh - 70px);
+  width: 100%;
+}
+
+.empty-cart h2 {
+  padding-top: 30vh;
+  text-align: center;
+  font-size: 20px;
+}
+
+.empty-cart a {
+  display: block;
+  margin: 10vh auto;
+  padding: 15px 40px;
+  width: 90%;
+  background-color: var(--mainDarkGreen);
+  color: #ddd;
+  letter-spacing: 2px;
+  font-weight: 900;
+  text-transform: uppercase;
+  text-decoration: none;
+  text-align: center;
+}
 
 /* end of cart */
 

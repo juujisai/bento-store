@@ -14,9 +14,7 @@ const ItemPage = ({ itemPage, getItemForPage, addItemToCart }) => {
   const idOfItem = useParams().id
 
   const handleClick = () => {
-    // item.selectedSize = ''
-    if (typeof item.order === 'undefined') item.order = []
-    // console.log(itemPage)
+
     addItemToCart(itemPage, selectedSize)
     setShowAlert(true)
     setTimeout(() => { setShowAlert(false) }, 2000)
@@ -37,7 +35,6 @@ const ItemPage = ({ itemPage, getItemForPage, addItemToCart }) => {
   const setFullSizeOptions = fullSize.map((k, i) => (
     <option key={i} value={k}>{k}</option>
   ))
-
   return (
     <div className='item-page'>
       <div className="item-category">
@@ -59,7 +56,7 @@ const ItemPage = ({ itemPage, getItemForPage, addItemToCart }) => {
         <form className='name-demo'>
           <label>Rozmiar</label>
           <select name="size" id="size" value={selectedSize} onChange={(e) => { setSelectedSize(e.target.value) }}>
-            {size === 'all' ? setFullSizeOptions : <option value='onesize'>onesize</option>}
+            {size === 'all' ? setFullSizeOptions : <option value={size}>{size}</option>}
           </select>
         </form>
       </div>

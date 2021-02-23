@@ -24,29 +24,22 @@ function reducer(state, action) {
 
   // adding to cart
   if (action.type === ADD_ITEM_TO_CART) {
-    let newItem = action.payload.item
 
-    // funkcja dodaje item do koszyka i dodaje mu klucz order, w którym przechowywane są ilości zamówionych przedmiotów o tym samym id oraz ich rozmiary
-
+    action.payload.item.orderSize = action.payload.size
 
     let newCart = [...state.cart]
 
-    // funkcja która sprawdza czy jest już takie id w koszyku i czy jest już dodany taki rozmiar do zamówienia (filter)
-    if (state.cart.filter(i => i.id === newItem.id && i.order.filter(k => k.size === action.payload.size).length).length !== 0) {
-
-      const id = newCart.findIndex(i => i.id === newItem.id)
-      const id2 = state.cart[id].order.findIndex(i => i.size === action.payload.size)
-      newCart[id].order[id2].amount++
-
+    const cartItem = newCart.find(item => item.orderSize === action.payload.size && item.id === action.payload.item.id)
+    if (cartItem) {
+      const item = newCart.map(k => k.id === action.payload.item.id && k.orderSize === action.payload.size ? { ...k, amount: k.amount + 1 } : k)
+      newCart = [...item]
+      console.log('jest', newCart)
     } else {
-      newItem.order.push({
-        amount: 1,
-        size: action.payload.size
-      })
-      newCart = [...state.cart, newItem]
+      newCart.push({ ...action.payload.item, amount: 1 })
+      console.log('nie jest', newCart)
     }
 
-    newCart = [...new Set(newCart)]
+
 
     // dodaj local storage
     localStorage.setItem('cartBento', JSON.stringify(newCart))
@@ -58,27 +51,35 @@ function reducer(state, action) {
   // modify cart items
 
   if (action.type === CHANGE_ITEM_COUNT) {
-    const id = action.payload.id
-    let cart = state.cart
+    let newCart = [...state.cart]
 
-    console.log(id)
+    let itemId = newCart.findIndex(i => i.id === action.payload.id && i.orderSize === action.payload.size)
+    let item = newCart[itemId]
+
+
     if (action.payload.operator === 'remove') {
-      cart = cart.filter(item => item.id !== id)
-
+      newCart.splice(itemId, 1)
       console.log('removing')
     }
 
-    if (action.payload.operator === 'increase') {
-      console.log('increasing')
+    if (action.payload.operator === 'increase' || action.payload.operator === 'decrease') {
+
+      action.payload.operator === 'increase' ? console.log('increasing') : console.log('decreasing')
+
+      action.payload.operator === 'increase' ?
+        item.amount++
+        :
+        item.amount--
+
+      newCart.splice(itemId, 1, item)
+
     }
 
-    if (action.payload.operator === 'decrease') {
-      console.log('decreasing')
-    }
 
-    localStorage.setItem('cartBento', JSON.stringify(cart))
 
-    return { ...state, cart }
+    localStorage.setItem('cartBento', JSON.stringify(newCart))
+
+    return { ...state, cart: [...newCart] }
   }
 
 

@@ -7,10 +7,8 @@ import { changeCartItem } from '../redux/actions/actions'
 
 
 
-const CartItem = ({ data: { img, name, id, order, price }, number, change }) => {
-
+const CartItem = ({ data: { img, name, id, amount, orderSize, price }, cart, change }) => {
   let sum = 0;
-  let amount = order[number].amount
   sum = amount * price
   // const amount = order.map((item, i) => {
   //   sum += (item.amount * price)
@@ -25,15 +23,15 @@ const CartItem = ({ data: { img, name, id, order, price }, number, change }) => 
       <tr>
         <td><Link to={`/shop/items/${id}`}><img src={img === 'undefined' ? no_picture : img} alt={name} /></Link></td>
         <td>{name}</td>
-        <td>{amount} x {order[number].size}</td>
+        <td>{amount} x {orderSize}</td>
         {/* <td>{amount}</td> */}
         <td>{sum.toFixed(2)} zł</td>
       </tr>
       <tr className='line'>
         <th id='cart-item-tools' colSpan='4'>
-          <span className='icon-success' onClick={() => change('increase', id, order[0].size)}><IoBagAddSharp /></span>
-          <span onClick={() => change('remove', id, order[0].size)}><IoTrashBinSharp /></span>
-          <span className='icon-danger' onClick={() => change('decrease', id, order[0].size)}><IoBagRemoveSharp /></span>
+          <span className='icon-success' onClick={() => change('increase', id, orderSize)}><IoBagAddSharp /></span>
+          <span onClick={() => change('remove', id, orderSize)}><IoTrashBinSharp /></span>
+          <span className='icon-danger' onClick={() => change('decrease', id, orderSize)}><IoBagRemoveSharp /></span>
         </th>
 
 
@@ -41,9 +39,12 @@ const CartItem = ({ data: { img, name, id, order, price }, number, change }) => 
     </>
   );
 }
+const mapStateToProps = ({ cart }) => {
+  return { cart }
+}
 
 const mapDispatchToProps = (dispatch) => {
   return { change: (operator, id, size) => dispatch(changeCartItem(operator, id, size)) }
 }
 
-export default connect(null, mapDispatchToProps)(CartItem);
+export default connect(mapStateToProps, mapDispatchToProps)(CartItem);

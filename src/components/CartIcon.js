@@ -9,7 +9,7 @@ const CartIcon = ({ cart }) => {
 
   const getSum = (cart, startValue) => {
     let total = startValue;
-    cart.length === 0 ? total = 0 : cart.forEach(i => i.order.forEach(j => total += j.amount))
+    cart.length === 0 ? total = 0 : cart.forEach(i => total += i.amount)
     return total
   }
 
