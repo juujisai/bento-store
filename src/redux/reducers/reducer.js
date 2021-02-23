@@ -78,7 +78,7 @@ function reducer(state, action) {
 
     }
 
-
+    newCart = newCart.filter(item => item.amount >= 1)
 
     localStorage.setItem('cartBento', JSON.stringify(newCart))
 
