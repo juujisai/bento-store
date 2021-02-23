@@ -12,6 +12,9 @@ function reducer(state, action) {
     if (action.payload.filter === 'news') {
       const dataToShow = state.shopData.filter(item => item.isNew)
       return { ...state, dataToShow }
+    } else if (action.payload.filter === 'women') {
+      const dataToShow = state.shopData.filter(item => item.group === 'kobiety')
+      return { ...state, dataToShow }
     }
 
   }

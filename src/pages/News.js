@@ -32,7 +32,7 @@ const News = ({ data, dataToShow }) => {
 
   return (
     <div className='section-new'>
-      <h1 className='whats-new'>Nowości w naszym sklepie internetowym</h1>
+      <h1 className='whats-new'>Nowości w naszym sklepie internetowym!</h1>
 
       <div className="items">
         {dataZ}

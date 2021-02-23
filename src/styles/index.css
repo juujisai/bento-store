@@ -355,9 +355,11 @@ header {
   margin-top: 20vh;
 }
 
-.whats-new {
+.whats-new,
+.site-name {
   padding: 30px 10% 0;
-  font-size: 1.75em;
+  font-size: 1.5em;
+  text-align: center;
 }
 
 .items {
@@ -445,7 +447,8 @@ header {
   margin: 15px 0;
 }
 
-.item-buy button {
+.item-buy button,
+.btn-main {
   display: block;
   padding: 10px 0;
   width: 100%;
@@ -609,7 +612,133 @@ header {
 
 /* end of cart */
 
+/* sort / filter  */
+.site-items-controllers {
+  margin: 0 auto;
+  padding-top: 30px;
+  width: 90%;
+  display: flex;
+  flex-wrap: wrap;
+}
 
+.filter,
+.sort {
+  width: 50%;
+  text-align: center;
+
+}
+
+.filter-btn,
+.sort-btn {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.amount-of-products {
+  margin: 10px 0;
+  width: 100%;
+  text-align: center;
+  color: var(--mainDarkGreen);
+  font-size: .8em;
+  font-weight: normal;
+}
+
+.dark-green {
+  margin-right: 10px;
+  font-size: 1.5em;
+  color: var(--mainDarkGreen);
+  font-weight: 900;
+
+}
+
+
+.filter-cont {
+  position: fixed;
+  left: 0;
+  top: 0;
+  padding: 5vh 5% 5vh;
+  width: 100%;
+  height: 100vh;
+  background-color: #fff;
+  z-index: 15;
+
+  transform: scale(0);
+  transition: .5s;
+
+  overflow-y: scroll;
+}
+
+.filter-cont.open {
+  transform: scale(1)
+}
+
+
+.info-cont {
+  display: flex;
+  padding: 10px 0 30px;
+  justify-content: space-between;
+  align-items: center;
+  font-size: .7em;
+  text-transform: uppercase;
+}
+
+
+.info-cont button {
+  outline: none;
+  border: none;
+  background-color: transparent;
+  font-size: 2em;
+}
+
+
+
+
+
+
+
+
+.filter-single-name {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 20px 10px;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #888;
+  color: #888
+}
+
+.filter-single:nth-last-of-type(1) .filter-single-name {
+  border-bottom: none;
+}
+
+.rotate {
+  transform: rotate(0deg);
+  transition: .5s;
+  color: var(--mainDarkGreen);
+  font-weight: 900;
+
+}
+
+.rotate.rotate-true {
+  transform: rotate(180deg);
+
+}
+
+.filtered-data {
+  width: 100%;
+  transform: scaleY(0);
+  transition: .5s;
+}
+
+.filter-data.open {
+  transform: scaleY(1);
+
+}
+
+/* end of sort / filter  */
 
 
 

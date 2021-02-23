@@ -12,7 +12,7 @@ const ItemDemoComponent = ({ data: { id, name, img, price } }) => {
   return (
     <div className='shop-item-demo'>
       <div className="img-demo-cont">
-        {typeof name !== undefined ? <img src={img} alt={name} /> : <img src={noPicture} alt={name} />}
+        <img src={typeof img !== 'undefined' ? img : noPicture} alt={name} />
       </div>
       <div className="name-demo">
         <span className="name">{name}</span>
