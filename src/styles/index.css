@@ -710,8 +710,12 @@ header {
   color: #888
 }
 
-.filter-single:nth-last-of-type(1) .filter-single-name {
+/* .filter-single:nth-last-of-type(1) .filter-single-name {
   border-bottom: none;
+} */
+
+.item-filter {
+  margin-top: 5vh;
 }
 
 .rotate {
@@ -727,16 +731,6 @@ header {
 
 }
 
-.filtered-data {
-  width: 100%;
-  transform: scaleY(0);
-  transition: .5s;
-}
-
-.filter-data.open {
-  transform: scaleY(1);
-
-}
 
 /* end of sort / filter  */
 
