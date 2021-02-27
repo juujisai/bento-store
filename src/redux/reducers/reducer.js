@@ -1,31 +1,31 @@
-import { SWITCH_NAV_VISIBILITY, FILTER_DATA_TO_SHOW, GET_ITEM_FROM_ID, ADD_ITEM_TO_CART, CHANGE_ITEM_COUNT } from '../actions/actions'
+import { SWITCH_NAV_VISIBILITY, FILTER_DATA_TO_SHOW, GET_ITEM_FROM_ID, ADD_ITEM_TO_CART, CHANGE_ITEM_COUNT, DATA_FILTER } from '../actions/actions'
 
 
 function reducer(state, action) {
-  // switch nav
+  // switch nav ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   if (action.type === SWITCH_NAV_VISIBILITY) {
     return { ...state, navOpen: !state.navOpen }
   }
 
-  // show new items
+  // show new items ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   if (action.type === FILTER_DATA_TO_SHOW) {
     if (action.payload.filter === 'news') {
       const dataToShow = state.shopData.filter(item => item.isNew)
       return { ...state, dataToShow }
     } else if (action.payload.filter === 'women') {
       const dataToShow = state.shopData.filter(item => item.group === 'kobiety')
-      return { ...state, dataToShow }
+      return { ...state, dataToShow, dataFiltered: [] }
     }
 
   }
 
-  // getting item from id
+  // getting item from id /////////////////////////////////////////////////////////////////////////////////////////////////////////////
   if (action.type === GET_ITEM_FROM_ID) {
     return { ...state, itemPage: state.shopData.filter(i => i.id === action.payload.id)[0] }
   }
 
 
-  // adding to cart
+  // adding to cart ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   if (action.type === ADD_ITEM_TO_CART) {
 
     action.payload.item.orderSize = action.payload.size
@@ -51,7 +51,7 @@ function reducer(state, action) {
     return { ...state, cart: newCart }
   }
 
-  // modify cart items
+  // modify cart items ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   if (action.type === CHANGE_ITEM_COUNT) {
     let newCart = [...state.cart]
@@ -83,6 +83,69 @@ function reducer(state, action) {
     localStorage.setItem('cartBento', JSON.stringify(newCart))
 
     return { ...state, cart: [...newCart] }
+  }
+
+
+
+  // filters //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  if (action.type === DATA_FILTER) {
+    console.log(action.payload.filters)
+    const filters = action.payload.filters
+    let fullData = state.dataToShow
+
+    let dataFiltered = []
+
+    // filter by type
+    fullData.forEach((item) => {
+      let obj = { name: item.type, value: true }
+      filters.type.forEach(one => {
+        if (one.name === obj.name && one.value === obj.value) {
+          dataFiltered = [...dataFiltered, item]
+        }
+      })
+    })
+
+    // filter by color 
+
+    dataFiltered.length === 0 ? dataFiltered = fullData : dataFiltered = [...dataFiltered]
+
+    dataFiltered.forEach((item) => {
+      let obj = { name: item.color, value: true }
+      filters.color.forEach(one => {
+        if (one.name === obj.name && one.value === obj.value) {
+          dataFiltered = [...dataFiltered, item]
+        }
+      })
+    })
+
+    dataFiltered.length === 0 ? dataFiltered = fullData : dataFiltered = [...dataFiltered]
+    // price filter
+
+    dataFiltered = dataFiltered.filter(item => item.price - 1 <= filters.price)
+
+
+    // news filter 
+
+    dataFiltered.length === 0 ? dataFiltered = fullData : dataFiltered = [...dataFiltered]
+
+    filters.new ? dataFiltered = dataFiltered.filter(item => item.isNew) : dataFiltered = [...dataFiltered]
+
+
+
+
+
+
+
+
+    dataFiltered = [...new Set(dataFiltered)]
+
+    if (dataFiltered.length === 0) {
+      alert('Brak przedmiotów pasujących do wybranych filtrów. Pokazuje wszystkie')
+      dataFiltered = fullData
+    }
+
+    return { ...state, dataFiltered }
   }
 
 

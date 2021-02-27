@@ -9,6 +9,7 @@ export const initialStore = {
   navOpen: false,
   shopData: shopProductsData,
   dataToShow: [],
+  dataFiltered: [],
   itemPage: { id: null },
   cart: data
 }

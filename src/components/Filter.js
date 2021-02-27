@@ -3,8 +3,9 @@ import { BsFilter } from 'react-icons/bs'
 import { GrClose } from 'react-icons/gr'
 import { BiDownArrow } from 'react-icons/bi'
 import { connect } from 'react-redux'
+import { filterData } from '../redux/actions/actions'
 
-const Filter = ({ dataToShow }) => {
+const Filter = ({ dataToShow, filterData }) => {
   const [data, setData] = React.useState([])
   const [show, setShow] = React.useState(false)
   const [showType, setShowType] = React.useState(false)
@@ -43,10 +44,15 @@ const Filter = ({ dataToShow }) => {
       setFilters({ ...filters, new: !filters.new })
     }
 
+
+
     // console.log(filters)
   }
 
-
+  const handleOnClick = () => {
+    filterData(filters)
+    setShow(!show)
+  }
 
 
 
@@ -161,7 +167,7 @@ const Filter = ({ dataToShow }) => {
           </div>
         </div>
 
-        <div className='item-filter'><button className='btn-main' onClick={() => setShow(!show)}>Filtruj</button></div>
+        <div className='item-filter'><button className='btn-main' onClick={handleOnClick}>Filtruj</button></div>
       </div>
 
     </div>
@@ -173,7 +179,7 @@ const mapStateToProps = ({ dataToShow }) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return {}
+  return { filterData: (filters) => dispatch(filterData(filters)) }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Filter);

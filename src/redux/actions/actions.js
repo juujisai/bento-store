@@ -6,7 +6,7 @@ export const ADD_ITEM_TO_CART = 'ADD_ITEM_TO_CART'
 // export const INCREASE_ITEM_COUNT = 'INCREASE_ITEM_COUNT'
 // export const DECREASE_ITEM_COUNT = 'DECREASE_ITEM_COUNT'
 export const CHANGE_ITEM_COUNT = 'CHANGE_ITEM_COUNT'
-
+export const DATA_FILTER = 'DATA_FILTER'
 
 export const showTheData = (filterType) => {
   return { type: FILTER_DATA_TO_SHOW, payload: { filter: filterType } }
@@ -26,14 +26,6 @@ export const changeCartItem = (operator, id, size) => {
 
 }
 
-// export const increase = (id) => {
-//   return { type: INCREASE_ITEM_COUNT, payload: { id } }
-// }
-
-// export const decrease = (id) => {
-//   return { type: DECREASE_ITEM_COUNT, payload: { id } }
-// }
-
-// export const remove = (id) => {
-//   return { type: REMOVE_ITEM_FROM_CART, payload: { id } }
-// }
+export const filterData = (filters) => {
+  return { type: DATA_FILTER, payload: { filters } }
+}

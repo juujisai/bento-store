@@ -5,7 +5,7 @@ import ItemDemoComponent from '../components/ItemDemoComponent'
 import { connect } from 'react-redux'
 import { showTheData } from '../redux/actions/actions'
 
-const Women = ({ dataToShow, data }) => {
+const Women = ({ dataToShow, data, dataFiltered }) => {
   const [shopDataFiltered, setShopDataFiltered] = React.useState([])
 
   React.useEffect(() => {
@@ -13,9 +13,10 @@ const Women = ({ dataToShow, data }) => {
     setTimeout(() => {
       dataToShow.length === 0 && data('women')
       setShopDataFiltered(dataToShow)
+      dataFiltered.length !== 0 && setShopDataFiltered(dataFiltered)
     }, 1000)
 
-  }, [data, dataToShow])
+  }, [data, dataToShow, dataFiltered])
 
 
   const dataZ = shopDataFiltered.map((item, id) => (
@@ -50,8 +51,8 @@ const Women = ({ dataToShow, data }) => {
   );
 }
 
-const mapStateToProps = ({ dataToShow }) => {
-  return { dataToShow }
+const mapStateToProps = ({ dataToShow, dataFiltered }) => {
+  return { dataToShow, dataFiltered }
 }
 
 const mapDispatchToProps = (dispatch) => {
