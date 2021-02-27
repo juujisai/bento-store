@@ -7,51 +7,111 @@ import { connect } from 'react-redux'
 const Filter = ({ dataToShow }) => {
   const [data, setData] = React.useState([])
   const [show, setShow] = React.useState(false)
-  // const [filters, setFilters] = React.useState({ type: '', color: '', price: '', new: '' })
   const [showType, setShowType] = React.useState(false)
   const [showColor, setShowColor] = React.useState(false)
   const [showPrice, setShowPrice] = React.useState(false)
   const [showNew, setShowNew] = React.useState(false)
 
+  const [filters, setFilters] = React.useState({
+    type: [],
+    color: [],
+    price: 0,
+    new: false
+  })
+  const [maxPrice, setMaxPrice] = React.useState(0)
+
+
+  const onChangeFilters = (e) => {
+    const { name, dataset, value } = e.target
+
+    if (dataset.what === 'type') {
+      let type = filters.type
+      let id = type.findIndex(i => i.name === name)
+      type.splice(id, 1, { name: type[id].name, value: !type[id].value })
+      setFilters({ ...filters, type })
+    }
+    if (dataset.what === 'color') {
+      let color = filters.color
+      let id = color.findIndex(i => i.name === name)
+      color.splice(id, 1, { name: color[id].name, value: !color[id].value })
+      setFilters({ ...filters, color })
+    }
+    if (dataset.what === 'price') {
+      setFilters({ ...filters, price: value })
+    }
+    if (dataset.what === 'new') {
+      setFilters({ ...filters, new: !filters.new })
+    }
+
+    // console.log(filters)
+  }
+
+
+
+
+
 
   React.useEffect(() => {
     setData(dataToShow)
-  }, [dataToShow])
+
+    let types = []
+    let colors = []
+    let priceList = []
+    let price = 0
+
+    data.map(item => types = [...types, item.type])
+    types = [...new Set(types)]
+
+    data.map(item => colors = [...colors, item.color])
+    colors = [...new Set(colors)]
+
+    data.map(item => priceList = [...priceList, item.price])
+    price = priceList.sort()[priceList.length - 1]
+    setMaxPrice(price)
+
+    let type = []
+    types.forEach(item => type = [...type, { name: item, value: false }])
+
+    let color = []
+    colors.forEach(item => color = [...color, { name: item, value: false }])
+
+    setFilters({
+      type, color, price, new: false
+    })
 
 
-  let typeList = []
-  let colorList = []
-  let priceList = []
-  let priceCont = { low: 0, high: 0 }
+  }, [dataToShow, data])
+
+
 
   if (data.length === 0) {
     return <div className="loader">loading</div>
   }
 
   // type filter
-  data.map(item => typeList = [...typeList, item.type])
-  typeList = [...new Set(typeList)]
-  const type = typeList.map((item, i) => (
-    <label key={i}><input type="radio" name={item} id={item} />{item}</label>
+  const type = filters.type.map((item, i) => (
+    <label key={i}><input value={item.value} type="checkbox" data-what='type' name={item.name} id={item.name} onChange={onChangeFilters} />{item.name}</label>
   ))
 
   // color filter
-  data.map(item => colorList = [...colorList, item.color])
-  colorList = [...new Set(colorList)]
-  const color = colorList.map((item, i) => (
-    <label key={i}><input type="radio" name={item} id={item} />{item}</label>
+
+  const color = filters.color.map((item, i) => (
+    <label key={i}><input value={item.value} type="checkbox" data-what='color' name={item.name} id={item.name} onChange={onChangeFilters} />{item.name}</label>
   ))
 
   // price filter
-  data.map(item => priceList = [...priceList, item.price])
-  priceCont.high = priceList.sort()[priceList.length - 1]
-  console.log(priceCont)
+
 
   const price = (
     <div className="price-list">
-      <label><input type="range" name="price" id="price" min={priceCont.low} max={priceCont.high} value={priceCont.high} />Cena</label>
-      <span>{priceCont.high} zł</span>
+      <label><input type="range" data-what='price' name="price" id="price" min={0} max={maxPrice} value={filters.price} onChange={onChangeFilters} />Cena</label>
+      <span>{filters.price} zł</span>
     </div>
+  )
+
+  // new filter
+  const newItem = (
+    <label><input type="checkbox" data-what='new' name="new" id="new" value={filters.new} onChange={onChangeFilters} />Nowości</label>
   )
 
 
@@ -96,8 +156,8 @@ const Filter = ({ dataToShow }) => {
             <div className="filter-single-name" onClick={() => setShowNew(!showNew)}>Nowość <BiDownArrow className={`rotate ${showNew ? 'rotate-true' : null}`} /></div>
             {showNew &&
               <div className='filtered-data'>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Architecto, voluptas.
-            </div>}
+                {newItem}
+              </div>}
           </div>
         </div>
 

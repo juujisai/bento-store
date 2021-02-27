@@ -731,6 +731,19 @@ header {
 
 }
 
+.filtered-data label {
+  display: flex;
+  margin-left: 20px;
+  width: 100%;
+  align-items: center;
+  line-height: 1.5;
+}
+
+.filtered-data label input {
+  display: block;
+  margin-right: 20px;
+}
+
 
 /* end of sort / filter  */
 
