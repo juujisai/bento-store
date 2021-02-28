@@ -14,6 +14,10 @@ class Header extends React.Component {
     bannerSquares: [],
   }
 
+  interval1;
+  interval2;
+  interval3;
+  interval4;
 
   time = 3000;
   idOfInterval;
@@ -64,8 +68,8 @@ class Header extends React.Component {
 
 
     // text from left
-    setTimeout(() => this.setState({ slideTheMessage: false }), this.time * 2)
-    setTimeout(() => this.setState({ slideTheMessage: true }), this.time * 3)
+    this.interval1 = setTimeout(() => this.setState({ slideTheMessage: false }), this.time * 2)
+    this.interval2 = setTimeout(() => this.setState({ slideTheMessage: true }), this.time * 3)
 
   }
 
@@ -84,14 +88,22 @@ class Header extends React.Component {
 
 
     this.setState({ bannerSquares })
-    setTimeout(() => this.setState({ isReady: !this.state.isReady, videoMessage: this.videoMessageList[0] }), this.time)
-    setTimeout(() => this.setState({ slideTheMessage: true }), this.time * 1.5)
+    this.interval3 = setTimeout(() => this.setState({ isReady: !this.state.isReady, videoMessage: this.videoMessageList[0] }), this.time)
+    this.interval4 = setTimeout(() => this.setState({ slideTheMessage: true }), this.time * 1.5)
   }
 
 
+  componentWillUnmount = () => {
+    clearInterval(this.idOfInterval)
+    clearTimeout(this.interval1)
+    clearTimeout(this.interval2)
+    clearTimeout(this.interval3)
+    clearTimeout(this.interval4)
+  }
+
   render() {
     const { isReady, videoMessage, slideTheMessage, bannerNumber } = this.state
-    console.log(this.state.bannerSquares)
+    // console.log(this.state.bannerSquares)
     const banner = bannerData.map(item =>
       <Banner data={item} key={item.id}></Banner>
     )
