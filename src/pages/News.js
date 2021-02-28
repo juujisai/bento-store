@@ -6,15 +6,20 @@ import ItemDemoComponent from '../components/ItemDemoComponent'
 
 const News = ({ data, dataToShow }) => {
   const [shopDataFiltered, setShopDataFiltered] = React.useState([])
+  const [getData, setGetData] = React.useState(true)
 
   React.useEffect(() => {
 
     setTimeout(() => {
-      dataToShow.length === 0 && data('news')
+      // warunek konieczny aby funkcja data wykonała się tylko raz (w zasadzie wykonuje się 2 razy)
+
+      getData && data('news')
+      setGetData(false)
+
       setShopDataFiltered(dataToShow)
     }, 1000)
 
-  }, [data, dataToShow])
+  }, [data, dataToShow, getData])
 
 
   const dataZ = shopDataFiltered.map((item, id) => (

@@ -9,6 +9,7 @@ function reducer(state, action) {
 
   // show new items ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   if (action.type === FILTER_DATA_TO_SHOW) {
+    state.dataToShow = []
     if (action.payload.filter === 'news') {
       const dataToShow = state.shopData.filter(item => item.isNew)
       return { ...state, dataToShow }
@@ -95,7 +96,7 @@ function reducer(state, action) {
     let fullData = state.dataToShow
 
     let dataFiltered = []
-
+    let helpData = []
     // filter by type
     fullData.forEach((item) => {
       let obj = { name: item.type, value: true }
@@ -107,18 +108,22 @@ function reducer(state, action) {
     })
 
     // filter by color 
-
     dataFiltered.length === 0 ? dataFiltered = fullData : dataFiltered = [...dataFiltered]
 
+    console.log(dataFiltered)
     dataFiltered.forEach((item) => {
       let obj = { name: item.color, value: true }
       filters.color.forEach(one => {
         if (one.name === obj.name && one.value === obj.value) {
-          dataFiltered = [...dataFiltered, item]
+          console.log('przekazuje')
+          helpData = [...helpData, item]
         }
       })
     })
 
+    dataFiltered = helpData
+
+    console.log(dataFiltered)
     dataFiltered.length === 0 ? dataFiltered = fullData : dataFiltered = [...dataFiltered]
     // price filter
 
@@ -127,7 +132,7 @@ function reducer(state, action) {
 
     // news filter 
 
-    dataFiltered.length === 0 ? dataFiltered = fullData : dataFiltered = [...dataFiltered]
+    // dataFiltered.length === 0 ? dataFiltered = fullData : dataFiltered = [...dataFiltered]
 
     filters.new ? dataFiltered = dataFiltered.filter(item => item.isNew) : dataFiltered = [...dataFiltered]
 

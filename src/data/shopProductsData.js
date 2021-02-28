@@ -136,7 +136,7 @@ const shopProductsData = [
     isNew: false,
   },
   {
-    id: 9,
+    id: 10,
     name: 'Skarpetki kobiece',
     group: 'kobiety',
     type: 'skarpety',

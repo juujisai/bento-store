@@ -7,16 +7,21 @@ import { showTheData } from '../redux/actions/actions'
 
 const Women = ({ dataToShow, data, dataFiltered }) => {
   const [shopDataFiltered, setShopDataFiltered] = React.useState([])
+  const [getData, setGetData] = React.useState(true)
 
   React.useEffect(() => {
 
     setTimeout(() => {
-      dataToShow.length === 0 && data('women')
+      // warunek konieczny aby funkcja data wykonała się tylko raz (w zasadzie wykonuje się 2 razy)
+
+      getData && data('women')
+      setGetData(false)
+
       setShopDataFiltered(dataToShow)
       dataFiltered.length !== 0 && setShopDataFiltered(dataFiltered)
     }, 1000)
 
-  }, [data, dataToShow, dataFiltered])
+  }, [data, dataToShow, dataFiltered, getData])
 
 
   const dataZ = shopDataFiltered.map((item, id) => (
