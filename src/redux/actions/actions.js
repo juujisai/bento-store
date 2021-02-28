@@ -7,6 +7,9 @@ export const ADD_ITEM_TO_CART = 'ADD_ITEM_TO_CART'
 // export const DECREASE_ITEM_COUNT = 'DECREASE_ITEM_COUNT'
 export const CHANGE_ITEM_COUNT = 'CHANGE_ITEM_COUNT'
 export const DATA_FILTER = 'DATA_FILTER'
+export const DATA_SORT = 'DATA_SORT'
+
+
 
 export const showTheData = (filterType) => {
   return { type: FILTER_DATA_TO_SHOW, payload: { filter: filterType } }
@@ -28,4 +31,9 @@ export const changeCartItem = (operator, id, size) => {
 
 export const filterData = (filters) => {
   return { type: DATA_FILTER, payload: { filters } }
+}
+
+
+export const sortData = (sortType) => {
+  return { type: DATA_SORT, payload: { sortType } }
 }

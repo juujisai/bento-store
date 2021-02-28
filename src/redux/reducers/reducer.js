@@ -1,4 +1,4 @@
-import { SWITCH_NAV_VISIBILITY, FILTER_DATA_TO_SHOW, GET_ITEM_FROM_ID, ADD_ITEM_TO_CART, CHANGE_ITEM_COUNT, DATA_FILTER } from '../actions/actions'
+import { SWITCH_NAV_VISIBILITY, FILTER_DATA_TO_SHOW, GET_ITEM_FROM_ID, ADD_ITEM_TO_CART, CHANGE_ITEM_COUNT, DATA_FILTER, DATA_SORT } from '../actions/actions'
 
 
 function reducer(state, action) {
@@ -15,6 +15,9 @@ function reducer(state, action) {
       return { ...state, dataToShow }
     } else if (action.payload.filter === 'women') {
       const dataToShow = state.shopData.filter(item => item.group === 'kobiety')
+      return { ...state, dataToShow, dataFiltered: [] }
+    } else if (action.payload.filter === 'men') {
+      const dataToShow = state.shopData.filter(item => item.group === 'mężczyźni')
       return { ...state, dataToShow, dataFiltered: [] }
     }
 
@@ -68,7 +71,7 @@ function reducer(state, action) {
 
     if (action.payload.operator === 'increase' || action.payload.operator === 'decrease') {
 
-      action.payload.operator === 'increase' ? console.log('increasing') : console.log('decreasing')
+      // action.payload.operator === 'increase' ? console.log('increasing') : console.log('decreasing')
 
       action.payload.operator === 'increase' ?
         item.amount++
@@ -163,6 +166,47 @@ function reducer(state, action) {
     return { ...state, dataFiltered }
   }
 
+  // sort ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  if (action.type === DATA_SORT) {
+    console.log(action.payload.sortType)
+    const sortType = action.payload.sortType
+    let dataFiltered
+
+    state.dataFiltered.length === 0 ? dataFiltered = state.dataToShow : dataFiltered = state.dataFiltered
+
+    if (sortType === 'najnizsza') {
+      const sortFunction = (a, b) => {
+        if (a.price > b.price) return 1
+        if (a.price < b.price) return -1
+        if (a.price === b.price) return 0
+      }
+      dataFiltered = dataFiltered.sort((a, b) => sortFunction(a, b))
+    }
+
+    if (sortType === 'najwyzsza') {
+      const sortFunction = (a, b) => {
+        if (a.price < b.price) return 1
+        if (a.price > b.price) return -1
+        if (a.price === b.price) return 0
+      }
+      dataFiltered = dataFiltered.sort((a, b) => sortFunction(a, b))
+    }
+
+    if (sortType === 'alfabet') {
+      const sortFunction = (a, b) => {
+        let x = a.name
+        let y = b.name
+        if (x > y) return 1
+        if (x < y) return -1
+        if (x === y) return 0
+      }
+      dataFiltered = dataFiltered.sort((a, b) => sortFunction(a, b))
+    }
+
+    console.log(dataFiltered)
+    return { ...state, dataFiltered }
+
+  }
 
   return state
 }
