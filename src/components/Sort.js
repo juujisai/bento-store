@@ -13,7 +13,6 @@ const Sort = ({ dataToShow, sortMe }) => {
   const [byAlphabet, setByAlphabet] = React.useState(false)
 
   const handleOnClickFilter = () => {
-    console.log('kekw')
 
     const sorts = [byLowestPrice, byHighestPrice, byAlphabet]
     const sortsName = ['najnizsza', 'najwyzsza', 'alfabet']
