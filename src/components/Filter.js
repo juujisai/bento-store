@@ -110,8 +110,8 @@ const Filter = ({ dataToShow, filterData }) => {
 
   const price = (
     <div className="price-list">
-      <label><input type="range" data-what='price' name="price" id="price" min={0} max={maxPrice} value={filters.price} onChange={onChangeFilters} />Cena</label>
-      <span>{filters.price} zł</span>
+      <label><input type="range" data-what='price' name="price" id="price" min={0} max={maxPrice} value={filters.price} onChange={onChangeFilters} /> <span>{filters.price} zł</span></label>
+
     </div>
   )
 

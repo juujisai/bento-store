@@ -96,9 +96,12 @@ function reducer(state, action) {
     let fullData = state.dataToShow
 
     let dataFiltered = []
-    let helpData = []
+
+    let dataToFilter = fullData
+
+    // let helpData = []
     // filter by type
-    fullData.forEach((item) => {
+    dataToFilter.forEach((item) => {
       let obj = { name: item.type, value: true }
       filters.type.forEach(one => {
         if (one.name === obj.name && one.value === obj.value) {
@@ -108,23 +111,30 @@ function reducer(state, action) {
     })
 
     // filter by color 
-    dataFiltered.length === 0 ? dataFiltered = fullData : dataFiltered = [...dataFiltered]
+    // dataFiltered.length === 0 ? dataToFilter = fullData : dataToFilter = [...dataFiltered]
+
+    if (dataFiltered.length === 0) {
+      dataToFilter = fullData
+    } else {
+      dataToFilter = [...dataFiltered]
+      dataFiltered = []
+    }
 
     console.log(dataFiltered)
-    dataFiltered.forEach((item) => {
+    dataToFilter.forEach((item) => {
       let obj = { name: item.color, value: true }
       filters.color.forEach(one => {
         if (one.name === obj.name && one.value === obj.value) {
           console.log('przekazuje')
-          helpData = [...helpData, item]
+          dataFiltered = [...dataFiltered, item]
         }
       })
     })
 
-    dataFiltered = helpData
+    dataFiltered.length === 0 ? dataFiltered = dataToFilter : dataFiltered = [...dataFiltered]
 
     console.log(dataFiltered)
-    dataFiltered.length === 0 ? dataFiltered = fullData : dataFiltered = [...dataFiltered]
+    // dataFiltered.length === 0 ? dataFiltered = fullData : dataFiltered = [...dataFiltered]
     // price filter
 
     dataFiltered = dataFiltered.filter(item => item.price - 1 <= filters.price)
