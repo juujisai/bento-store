@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import { sortData } from '../redux/actions/actions'
 
 
-const Sort = ({ dataToShow, sortMe }) => {
+const Sort = ({ dataToShow, sortMe, dataFilterd }) => {
   const [show, setShow] = React.useState(false)
   const [byLowestPrice, setByLowestPrice] = React.useState(false)
   const [byHighestPrice, setByHighestPrice] = React.useState(false)

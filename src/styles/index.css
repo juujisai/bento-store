@@ -749,9 +749,50 @@ header {
 
 
 
-
+/* footer */
 
 footer {
-  height: 40vh;
-  background-color: #888;
+  padding: 0 5%;
+  min-height: 40vh;
+  background-color: #eee;
+  overflow: hidden;
+
 }
+
+.footer-list-item {
+  overflow: hidden;
+}
+
+
+.footer-list-item h2 {
+  color: #555;
+  line-height: 3;
+  font-size: 1.25em;
+}
+
+
+div.cont {
+  color: #999;
+  line-height: 2;
+}
+
+.media ul {
+  list-style-type: none;
+  display: flex;
+  padding-bottom: 10%;
+}
+
+.media ul li {
+  line-height: 3;
+  width: calc(100% / 3);
+}
+
+.media ul li a {
+  display: block;
+  width: 100%;
+  color: #555;
+  text-align: center;
+  font-size: 2em;
+}
+
+/* end of footer */

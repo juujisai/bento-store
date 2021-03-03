@@ -201,7 +201,7 @@ function reducer(state, action) {
       }
       dataFiltered = dataFiltered.sort((a, b) => sortFunction(a, b))
     }
-
+    console.log(dataFiltered)
     return { ...state, dataFiltered }
 
   }
