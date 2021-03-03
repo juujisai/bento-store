@@ -16,13 +16,16 @@ const NavElements = ({ navOpen, switchVisible }) => {
 
 
   const nav = menuData.map(item => (
-    <li className="navi-li" key={item.id} style={navOpen ? { top: `${item.id * .15 * window.innerHeight + 70}px` } : { top: `-200px` }}>
+    // <li className="navi-li" key={item.id} style={navOpen ? { top: `${item.id * .15 * window.innerHeight + 70}px` } : { top: `-200px` }}>
+    <li className={`navi-li ${navOpen ? 'navOpen' : null}`} key={item.id}>
       <NavLink
         to={item.path}
         onClick={() => {
           handleClick()
           switchVisible()
         }}
+        className={navOpen ? 'navOpen' : null}
+        style={{ transitionDelay: `${item.id * 0.25}s` }}
       >
         {item.title}
       </NavLink>
