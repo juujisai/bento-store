@@ -839,4 +839,21 @@ div.cont {
 /* end checkout page */
 
 
+/* error page */
+.error-page {
+  margin: 15vh 5%;
+  min-height: 50vh;
+
+}
+
+.error-page h1 {
+  padding-top: 100px;
+  margin-bottom: 25px;
+  font-size: 1.25em;
+
+}
+
+/* end error page */
+
+
 @media (min-width: 400px) {}
