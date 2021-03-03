@@ -2,16 +2,18 @@ import React from 'react';
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import CartItem from '../components/CartItem'
+import { clearCart } from '../redux/actions/actions'
 
-const CartPage = ({ cart }) => {
+const CartPage = ({ cart, clear }) => {
 
   const items = cart.map((item, i) => (
     <CartItem data={item} key={i} />
   ))
-  // cart.forEach(a => console.log(a))
-  // const items = cart.map(a => a.order.map((b, i) => (
-  //   <CartItem data={a} key={i} number={i} />
-  // )))
+
+  let sum = 0;
+  cart.forEach(item => sum += item.amount * item.price)
+  sum = sum.toFixed(2)
+
 
   if (cart.length === 0) {
     return (
@@ -36,6 +38,10 @@ const CartPage = ({ cart }) => {
           {items}
         </tbody>
       </table>
+      <p className='sum-price'>Razem: <strong>{sum} zł</strong></p>
+      <div className="item-buy">
+        <button onClick={() => clear()}><Link to='/checkout'>Kup przedmioty</Link></button>
+      </div>
     </div>
   );
 }
@@ -44,4 +50,9 @@ const mapStateToProps = ({ cart }) => {
   return { cart }
 }
 
-export default connect(mapStateToProps)(CartPage);
+const mapDispatchToProps = (dispatch) => {
+  return { clear: () => dispatch(clearCart()) }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(CartPage);

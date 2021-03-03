@@ -8,7 +8,7 @@ export const ADD_ITEM_TO_CART = 'ADD_ITEM_TO_CART'
 export const CHANGE_ITEM_COUNT = 'CHANGE_ITEM_COUNT'
 export const DATA_FILTER = 'DATA_FILTER'
 export const DATA_SORT = 'DATA_SORT'
-
+export const CLEAR_CART = 'CLEAR_CART'
 
 
 export const showTheData = (filterType) => {
@@ -36,4 +36,8 @@ export const filterData = (filters) => {
 
 export const sortData = (sortType) => {
   return { type: DATA_SORT, payload: { sortType } }
+}
+
+export const clearCart = () => {
+  return { type: CLEAR_CART }
 }

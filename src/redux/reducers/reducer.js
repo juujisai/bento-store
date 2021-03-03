@@ -1,4 +1,4 @@
-import { SWITCH_NAV_VISIBILITY, FILTER_DATA_TO_SHOW, GET_ITEM_FROM_ID, ADD_ITEM_TO_CART, CHANGE_ITEM_COUNT, DATA_FILTER, DATA_SORT } from '../actions/actions'
+import { SWITCH_NAV_VISIBILITY, FILTER_DATA_TO_SHOW, GET_ITEM_FROM_ID, ADD_ITEM_TO_CART, CHANGE_ITEM_COUNT, DATA_FILTER, DATA_SORT, CLEAR_CART } from '../actions/actions'
 
 
 function reducer(state, action) {
@@ -88,7 +88,12 @@ function reducer(state, action) {
 
     return { ...state, cart: [...newCart] }
   }
+  // CLEAR CART /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  if (action.type === CLEAR_CART) {
+    localStorage.setItem('cartBento', JSON.stringify([]))
 
+    return { ...state, cart: [] }
+  }
 
 
   // filters //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
