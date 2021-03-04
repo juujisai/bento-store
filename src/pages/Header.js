@@ -124,13 +124,14 @@ class Header extends React.Component {
         </div>
         <div className="header-rest">
 
-        </div>
-        <div className="banners-cont" style={{ width: `${bannerData.length * 100}%` }}>
-          <div className="banners" style={{ transform: `translateX(${-1 * bannerNumber * 100 / bannerData.length}%)` }}>
-            {banner}
-          </div>
-          <div className="square-nav">
-            {squareNav}
+
+          <div className="banners-cont" style={{ width: `${bannerData.length * 100}%` }}>
+            <div className="banners" style={{ transform: `translateX(${-1 * bannerNumber * 100 / bannerData.length}%)` }}>
+              {banner}
+            </div>
+            <div className="square-nav">
+              {squareNav}
+            </div>
           </div>
         </div>
       </header >

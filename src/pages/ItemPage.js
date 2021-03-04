@@ -43,28 +43,31 @@ const ItemPage = ({ itemPage, getItemForPage, addItemToCart }) => {
       <div className="img-demo-cont item-image">
         <img src={typeof img !== 'undefined' ? img : noPicture} alt={name} />
       </div>
-      <div className="name-demo name item-name">
-        {name}
-      </div>
-      <div className="name-demo price-demo price item-price">
-        {price} zł
-      </div>
-      <div className="name-demo item-color">
-        Kolor: {color}
-      </div>
-      <div className="item-size">
-        <form className='name-demo'>
-          <label>Rozmiar</label>
-          <select name="size" id="size" value={selectedSize} onChange={(e) => { setSelectedSize(e.target.value) }}>
-            {size === 'all' ? setFullSizeOptions : <option value={size}>{size}</option>}
-          </select>
-        </form>
-      </div>
+      <div className="item-page-info">
 
-      <div className="item-buy">
-        <button onClick={handleClick}>Dodaj do koszyka</button>
+        <div className="name-demo name item-name">
+          {name}
+        </div>
+        <div className="name-demo price-demo price item-price">
+          {price} zł
       </div>
+        <div className="name-demo item-color">
+          Kolor: {color}
+        </div>
+        <div className="item-size">
+          <form className='name-demo'>
+            <label>Rozmiar:</label>
+            <select name="size" id="size" value={selectedSize} onChange={(e) => { setSelectedSize(e.target.value) }}>
+              {size === 'all' ? setFullSizeOptions : <option value={size}>{size}</option>}
+            </select>
+          </form>
+        </div>
 
+        <div className="item-buy">
+          <button onClick={handleClick}>Dodaj do koszyka</button>
+        </div>
+
+      </div>
       <p className="desc">
         {desc}
       </p>
