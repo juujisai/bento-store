@@ -21,7 +21,7 @@ const CartItem = ({ data: { img, name, id, amount, orderSize, price }, cart, cha
   return (
     <>
       <tr>
-        <td><Link to={`/shop/items/${id}`}><img src={img === 'undefined' ? no_picture : img} alt={name} /></Link></td>
+        <td><Link to={`/shop/items/${id}`}><img src={typeof img === 'undefined' ? no_picture : img} alt={name} /></Link></td>
         <td>{name}</td>
         <td>{amount} x {orderSize}</td>
         {/* <td>{amount}</td> */}
