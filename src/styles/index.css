@@ -655,6 +655,7 @@ header {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 
 .amount-of-products {
